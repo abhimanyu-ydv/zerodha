@@ -1,3 +1,9 @@
+// market indices shown in the top bar
+export const indices = [
+  { name: "NIFTY 50", points: 22326.9, change: -0.43 },
+  { name: "SENSEX", points: 73502.64, change: -0.3 },
+];
+
 export const watchlist = [
   {
     name: "INFY",

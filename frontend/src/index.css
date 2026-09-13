@@ -31,10 +31,75 @@ code {
   margin: 0 150px;
 }
 
+@media (max-width: 768px) {
+  #supportWrapper{
+    margin: 0;
+  }
+}
+
+.support-quick-links a{
+  display: inline-block;
+  margin: 20px 20px 0 0;
+}
+
 #supportHero input{
   padding: 20px 50px;
   width: 100%;
   font-size: 20px;
   border-radius: 10px;
   border: none;
+}
+/* ---------- Brand ---------- */
+:root {
+  --zerodha-blue: #387ed1;
+  --bs-primary: var(--zerodha-blue);
+  --bs-primary-rgb: 56, 126, 209;
+  --bs-link-color: var(--zerodha-blue);
+  --bs-link-hover-color: #2d6bb5;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+    'Helvetica Neue', sans-serif;
+  color: #424242;
+}
+
+h1, h2, h3, h4, h5 {
+  color: #333;
+  font-weight: 500;
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--zerodha-blue);
+  --bs-btn-border-color: var(--zerodha-blue);
+  --bs-btn-hover-bg: #2d6bb5;
+  --bs-btn-hover-border-color: #2d6bb5;
+  --bs-btn-active-bg: #2a63a8;
+  --bs-btn-active-border-color: #2a63a8;
+  font-weight: 500;
+}
+
+/* ---------- Signup page ---------- */
+.account-card {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.account-card:hover {
+  border-color: var(--zerodha-blue) !important;
+  box-shadow: 0 2px 12px rgba(56, 126, 209, 0.12);
+}
+
+.step-number {
+  width: 44px;
+  height: 44px;
+  font-size: 0.95rem;
+}
+
+.signup-faq .accordion-button:not(.collapsed) {
+  color: #333;
+  background-color: #fff;
+}
+
+.signup-faq .accordion-button::after {
+  margin-left: auto;
 }

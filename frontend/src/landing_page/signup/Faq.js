@@ -36,7 +36,7 @@ function Faq() {
         <div className="container py-5">
             <h2 className="fs-2 mb-5">FAQs</h2>
 
-            <div className="accordion accordion-flush" id="signupFaq">
+            <div className="accordion accordion-flush signup-faq" id="signupFaq">
                 {FAQS.map((faq, i) => (
                     <div className="accordion-item border-0" key={faq.q}>
                         <div style={{ width: "150px", height: "3px", backgroundColor: "#387ed1" }} />

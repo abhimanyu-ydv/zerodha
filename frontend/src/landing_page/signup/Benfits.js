@@ -48,11 +48,11 @@ function Benfits() {
     return ( <>
         <div className="container py-5">
             <div className="row align-items-center">
-                <div className="col-6 text-center">
+                <div className="col-lg-6 text-center">
                     <BenefitsIllustration />
                     <h2 className="fs-2 mt-4">Benefits of opening a Zerodha demat account</h2>
                 </div>
-                <div className="col-6 ps-5">
+                <div className="col-lg-6 ps-lg-5 mt-5 mt-lg-0">
                     {BENEFITS.map((benefit) => (
                         <div className="mb-5" key={benefit.title}>
                             <h4 className="fs-4">{benefit.title}</h4>

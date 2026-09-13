@@ -1,6 +1,5 @@
 import React from 'react';
 import Hero from "./Hero";
-import SignupPart from "./SignupPart";
 import Demant from "./Demant";
 import Investment from "./Investment";
 import Steps from "./Steps";
@@ -13,7 +12,6 @@ function Signup() {
     return (
         <>
             <Hero />
-            <SignupPart />
             <Demant />
             <Investment />
             <Steps />

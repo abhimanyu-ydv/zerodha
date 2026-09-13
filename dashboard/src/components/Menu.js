@@ -1,98 +1,81 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
-import { Link } from "react-router-dom";
+import api, { SIGNUP_URL } from "../api";
+import GeneralContext from "./GeneralContext";
+
+const MENU_ITEMS = [
+  { label: "Dashboard", path: "/" },
+  { label: "Orders", path: "/orders" },
+  { label: "Holdings", path: "/holdings" },
+  { label: "Positions", path: "/positions" },
+  { label: "Funds", path: "/funds" },
+  { label: "Apps", path: "/apps" },
+];
 
 const Menu = () => {
-  const [selectedMenu, setSelectedMenu] = useState(0);
+  const { user } = useContext(GeneralContext);
+  const { pathname } = useLocation();
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const profileRef = useRef(null);
 
-  const handleMenuClick = (index) => {
-    setSelectedMenu(index);
+  useEffect(() => {
+    if (!isProfileDropdownOpen) return;
+
+    const handleClickOutside = (e) => {
+      if (profileRef.current && !profileRef.current.contains(e.target)) {
+        setIsProfileDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isProfileDropdownOpen]);
+
+  const handleLogout = async () => {
+    try {
+      await api.post("/logout");
+    } finally {
+      window.location.href = SIGNUP_URL;
+    }
   };
 
-  const handleProfileClick = (index) => {
-    setIsProfileDropdownOpen(!isProfileDropdownOpen);
-  };
-
-  const menuClass = "menu";
-  const activeMenuClass = "menu selected";
+  const username = user ? user.username : "";
+  const initials = username.slice(-2) || "ZU";
 
   return (
     <div className="menu-container">
-      <img src="logo.png" style={{ width: "50px" }} />
+      <img src="/logo.png" alt="Zerodha" style={{ width: "50px" }} />
       <div className="menus">
         <ul>
-          <li>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/"
-              onClick={() => handleMenuClick(0)}
-            >
-              <p className={selectedMenu === 0 ? activeMenuClass : menuClass}>
-                Dashboard
-              </p>
-            </Link>
-          </li>
-          <li>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/orders"
-              onClick={() => handleMenuClick(1)}
-            >
-              <p className={selectedMenu === 1 ? activeMenuClass : menuClass}>
-                Orders
-              </p>
-            </Link>
-          </li>
-          <li>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/holdings"
-              onClick={() => handleMenuClick(2)}
-            >
-              <p className={selectedMenu === 2 ? activeMenuClass : menuClass}>
-                Holdings
-              </p>
-            </Link>
-          </li>
-          <li>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/positions"
-              onClick={() => handleMenuClick(3)}
-            >
-              <p className={selectedMenu === 3 ? activeMenuClass : menuClass}>
-                Positions
-              </p>
-            </Link>
-          </li>
-          <li>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="funds"
-              onClick={() => handleMenuClick(4)}
-            >
-              <p className={selectedMenu === 4 ? activeMenuClass : menuClass}>
-                Funds
-              </p>
-            </Link>
-          </li>
-          <li>
-            <Link
-              style={{ textDecoration: "none" }}
-              to="/apps"
-              onClick={() => handleMenuClick(6)}
-            >
-              <p className={selectedMenu === 6 ? activeMenuClass : menuClass}>
-                Apps
-              </p>
-            </Link>
-          </li>
+          {MENU_ITEMS.map((item) => (
+            <li key={item.path}>
+              <Link style={{ textDecoration: "none" }} to={item.path}>
+                <p className={pathname === item.path ? "menu selected" : "menu"}>
+                  {item.label}
+                </p>
+              </Link>
+            </li>
+          ))}
         </ul>
         <hr />
-        <div className="profile" onClick={handleProfileClick}>
-          <div className="avatar">ZU</div>
-          <p className="username">USERID</p>
+        <div className="profile-wrapper" ref={profileRef}>
+          <div
+            className="profile"
+            onClick={() => setIsProfileDropdownOpen((open) => !open)}
+          >
+            <div className="avatar">{initials}</div>
+            <p className="username">{username}</p>
+          </div>
+
+          {isProfileDropdownOpen && (
+            <div className="profile-dropdown">
+              <p className="dropdown-user">{username}</p>
+              <button className="logout-btn" onClick={handleLogout}>
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { API_URL, DASHBOARD_URL } from "../config";
+
 function Navbar() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    fetch(`${API_URL}/me`, { credentials: "include" })
+      .then((res) => setIsLoggedIn(res.ok))
+      .catch(() => setIsLoggedIn(false));
+  }, []);
+
   return (
     <nav
       className="navbar navbar-expand-lg border-bottom"
@@ -10,9 +20,9 @@ function Navbar() {
       <div className="container p-2">
         <Link className="navbar-brand" to="/">
           <img
-            src="media/images/logo.svg"
+            src="/media/images/logo.svg"
             style={{ width: "25%" }}
-            alt="Logo"
+            alt="Zerodha"
           />
         </Link>
         <button
@@ -27,35 +37,39 @@ function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <form className="d-flex" role="search">
-            <ul className="navbar-nav mb-lg-0">
-              <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="/signup">
+          <ul className="navbar-nav mb-lg-0">
+            <li className="nav-item">
+              {isLoggedIn ? (
+                <a className="nav-link active" href={DASHBOARD_URL}>
+                  Dashboard
+                </a>
+              ) : (
+                <Link className="nav-link active" to="/signup">
                   Signup
                 </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="/about">
-                  About
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="/product">
-                  Product
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="/pricing">
-                  Pricing
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link active" to="/support">
-                  Support
-                </Link>
-              </li>
-            </ul>
-          </form>
+              )}
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/about">
+                About
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/product">
+                Product
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/pricing">
+                Pricing
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link active" to="/support">
+                Support
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>

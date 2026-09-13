@@ -218,4 +218,43 @@
     background: #9b9b9b;
     color: #fff;
   }
-  
+
+  #buy-window {
+    height: auto;
+    cursor: default;
+    padding-bottom: 20px;
+    box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+  }
+
+  #buy-window .header.sell {
+    background: #ff5722;
+  }
+
+  #buy-window .buttons {
+    top: 0;
+  }
+
+  #buy-window button.btn {
+    border: none;
+    cursor: pointer;
+    font-size: 0.85rem;
+  }
+
+  #buy-window button.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .btn-orange {
+    background: #ff5722;
+  }
+
+  .btn-orange:hover {
+    background: #ff7a50;
+  }
+
+  .order-error {
+    margin: 0;
+    font-size: 0.8rem;
+    color: rgb(223, 73, 73);
+  }

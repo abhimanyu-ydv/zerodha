@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const BLUE = "#387ed1";
 
@@ -78,17 +79,17 @@ function Explore() {
 
             <div className="row g-4">
                 {ACCOUNTS.map((account) => (
-                    <div className="col-4" key={account.title}>
-                        <a
-                            href=""
-                            className="d-block h-100 p-4 border rounded text-decoration-none text-reset"
+                    <div className="col-lg-4 col-md-6" key={account.title}>
+                        <Link
+                            to="/support"
+                            className="account-card d-block h-100 p-4 border rounded text-decoration-none text-reset"
                         >
                             <div className="d-flex align-items-center">
                                 {account.icon}
                                 <h5 className="fs-5 mb-0">{account.title}</h5>
                             </div>
                             <p className="text-muted mt-3 mb-0">{account.desc}</p>
-                        </a>
+                        </Link>
                     </div>
                 ))}
             </div>

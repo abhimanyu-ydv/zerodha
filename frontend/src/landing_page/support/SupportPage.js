@@ -1,18 +1,24 @@
 import React from "react";
+import { useSearchParams } from "react-router-dom";
 
 import Hero from "./Hero";
 import CreateTicket from "./CreateTicket";
 
-import Navbar from "../Navbar";
-import Footer from "../Footer";
+function SupportPage() {
+  // The search text lives in the URL (?q=...) so topic links can pre-fill it
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get("q") || "";
 
-function PricingPage() {
+  const handleQueryChange = (text) => {
+    setSearchParams(text ? { q: text } : {}, { replace: true });
+  };
+
   return (
     <>
-      <Hero />
-      <CreateTicket />
+      <Hero query={query} onQueryChange={handleQueryChange} />
+      <CreateTicket query={query} />
     </>
   );
 }
 
-export default PricingPage;
+export default SupportPage;

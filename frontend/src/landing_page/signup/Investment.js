@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const BLUE = "#387ed1";
 const CORAL = "#ec5f51";
@@ -79,7 +80,7 @@ function Investment() {
 
             <div className="row">
                 {OPTIONS.map((option) => (
-                    <div className="col-6 d-flex mb-5 px-5" key={option.title}>
+                    <div className="col-md-6 d-flex mb-5 px-lg-5" key={option.title}>
                         <div className="me-4 flex-shrink-0">{option.icon}</div>
                         <div>
                             <h4 className="fs-4">{option.title}</h4>
@@ -90,7 +91,7 @@ function Investment() {
             </div>
 
             <div className="text-center mt-3">
-                <button className="btn btn-primary btn-lg px-5 py-3">Explore Investments</button>
+                <Link to="/product" className="btn btn-primary btn-lg px-5 py-3">Explore Investments</Link>
             </div>
         </div>
         </> );

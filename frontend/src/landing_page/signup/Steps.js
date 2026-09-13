@@ -53,16 +53,15 @@ function Steps() {
                 <h2 className="text-center fs-2 mb-5">Steps to open a demat account with Zerodha</h2>
 
                 <div className="row align-items-center">
-                    <div className="col-6 text-center">
+                    <div className="col-lg-6 text-center">
                         <StepsIllustration />
                     </div>
-                    <div className="col-6 pe-5">
+                    <div className="col-lg-6 pe-lg-5 mt-4 mt-lg-0">
                         {STEPS.map((step, i) => (
                             <div key={step.no}>
                                 <div className="d-flex align-items-center py-4">
                                     <span
-                                        className="d-flex align-items-center justify-content-center rounded-circle border text-muted flex-shrink-0"
-                                        style={{ width: "44px", height: "44px" }}
+                                        className="step-number d-flex align-items-center justify-content-center rounded-circle border text-muted flex-shrink-0"
                                     >
                                         {step.no}
                                     </span>

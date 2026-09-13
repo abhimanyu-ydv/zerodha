@@ -13,7 +13,8 @@ function Team() {
       >
         <div className="col-6 p-3 text-center">
           <img
-            src="media/images/nithinKamath.jpg"
+            src="/media/images/nithinKamath.jpg"
+            alt="Nithin Kamath"
             style={{ borderRadius: "100%", width: "50%" }}
           />
           <h4 className="mt-5">Nithin Kamath</h4>
@@ -30,10 +31,6 @@ function Team() {
             (SMAC) and the Market Data Advisory Committee (MDAC).
           </p>
           <p>Playing basketball is his zen.</p>
-          <p>
-            Connect on <a href="">Homepage</a> / <a href="">TradingQnA</a> /{" "}
-            <a href="">Twitter</a>
-          </p>
         </div>
       </div>
     </div>

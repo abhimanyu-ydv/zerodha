@@ -1,10 +1,13 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
+import { DASHBOARD_URL } from "../../config";
 
 function Stats() {
   return (
     <div className="container p-3">
-      <div className="row p-5">
-        <div className="col-6 p-5">
+      <div className="row p-lg-5">
+        <div className="col-lg-6 p-5">
           <h1 className="fs-2 mb-5">Trust with confidence</h1>
           <h2 className="fs-4">Customer-first always</h2>
           <p className="text-muted">
@@ -28,16 +31,24 @@ function Stats() {
             money.
           </p>
         </div>
-        <div className="col-6 p-5">
-          <img src="media/images/ecosystem.png" style={{ width: "90%" }} />
+        <div className="col-lg-6 p-5">
+          <img
+            src="/media/images/ecosystem.png"
+            alt="The Zerodha ecosystem"
+            className="img-fluid"
+            style={{ width: "90%" }}
+          />
           <div className="text-center">
-            <a href="" className="mx-5" style={{ textDecoration: "none" }}>
+            <Link to="/product" className="mx-5" style={{ textDecoration: "none" }}>
               Explore our products{" "}
-              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-            </a>
-            <a href="" style={{ textDecoration: "none" }}>
+              <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
+            </Link>
+            <a
+              href={DASHBOARD_URL}
+              style={{ textDecoration: "none" }}
+            >
               Try Kite demo{" "}
-              <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+              <i className="fa fa-long-arrow-right" aria-hidden="true"></i>
             </a>
           </div>
         </div>

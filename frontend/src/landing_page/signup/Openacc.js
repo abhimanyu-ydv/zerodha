@@ -7,7 +7,12 @@ function Openacc() {
             <p className="text-muted fs-5 mt-4">
                 Simple and intuitive apps &middot; ₹0 for investments &middot; ₹20 for intraday and F&amp;O trades.
             </p>
-            <button className="btn btn-primary btn-lg px-5 py-3 mt-3">Signup for free</button>
+            <button
+                className="btn btn-primary btn-lg px-5 py-3 mt-3"
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
+                Signup for free
+            </button>
         </div>
         </> );
 }

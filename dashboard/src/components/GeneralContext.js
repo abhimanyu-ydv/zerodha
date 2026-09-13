@@ -1,35 +1,66 @@
-import React, { useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import BuyActionWindow from "./BuyActionWindow";
 
 const GeneralContext = React.createContext({
-  openBuyWindow: (uid) => {},
+  user: null,
+  refreshKey: 0,
+  openBuyWindow: (stock) => {},
+  openSellWindow: (stock) => {},
   closeBuyWindow: () => {},
+  notifyPortfolioChanged: () => {},
 });
 
-export const GeneralContextProvider = (props) => {
-  const [isBuyWindowOpen, setIsBuyWindowOpen] = useState(false);
-  const [selectedStockUID, setSelectedStockUID] = useState("");
+export const GeneralContextProvider = ({ user, children }) => {
+  const [orderWindow, setOrderWindow] = useState(null);
+  const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleOpenBuyWindow = (uid) => {
-    setIsBuyWindowOpen(true);
-    setSelectedStockUID(uid);
-  };
+  const openBuyWindow = useCallback((stock) => {
+    setOrderWindow({ stock, mode: "BUY" });
+  }, []);
 
-  const handleCloseBuyWindow = () => {
-    setIsBuyWindowOpen(false);
-    setSelectedStockUID("");
-  };
+  const openSellWindow = useCallback((stock) => {
+    setOrderWindow({ stock, mode: "SELL" });
+  }, []);
+
+  const closeBuyWindow = useCallback(() => {
+    setOrderWindow(null);
+  }, []);
+
+  // Components that show portfolio data re-fetch whenever refreshKey changes
+  const notifyPortfolioChanged = useCallback(() => {
+    setRefreshKey((key) => key + 1);
+  }, []);
+
+  const value = useMemo(
+    () => ({
+      user,
+      refreshKey,
+      openBuyWindow,
+      openSellWindow,
+      closeBuyWindow,
+      notifyPortfolioChanged,
+    }),
+    [
+      user,
+      refreshKey,
+      openBuyWindow,
+      openSellWindow,
+      closeBuyWindow,
+      notifyPortfolioChanged,
+    ]
+  );
 
   return (
-    <GeneralContext.Provider
-      value={{
-        openBuyWindow: handleOpenBuyWindow,
-        closeBuyWindow: handleCloseBuyWindow,
-      }}
-    >
-      {props.children}
-      {isBuyWindowOpen && <BuyActionWindow uid={selectedStockUID} />}
+    <GeneralContext.Provider value={value}>
+      {children}
+      {orderWindow && (
+        <BuyActionWindow
+          key={`${orderWindow.mode}-${orderWindow.stock.name}`}
+          stock={orderWindow.stock}
+          mode={orderWindow.mode}
+        />
+      )}
     </GeneralContext.Provider>
   );
 };
