@@ -1,5 +1,3 @@
-// Starter portfolio given to every new account so the dashboard isn't empty.
-
 const DEMO_OPENING_BALANCE = 10000;
 
 const demoHoldings = [
